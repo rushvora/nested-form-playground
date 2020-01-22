@@ -1,0 +1,18 @@
+<div [formGroup]="form">
+  <span>
+    <ngx-intl-tel-input ngDefaultControl
+    [enableAutoCountrySelect]="true"
+    [enablePlaceholder]="true"
+    [searchCountryFlag]="true"
+    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+    [selectFirstCountry]="true"
+    [tooltipField]="TooltipLabel.Name"
+    [phoneValidation]="true"
+    [maxLength]="12"
+    [preferredCountries] = "preferredCountries"
+    [separateDialCode]="separateDialCode"
+    [formControlName]="formControlNameCustom"
+    name="custom">
+    </ngx-intl-tel-input >
+  </span>
+</div>

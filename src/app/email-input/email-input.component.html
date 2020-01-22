@@ -1,0 +1,6 @@
+<div [formGroup]="emailInputForm">
+  <div class="form-group">
+    <label for="emailInputNo{{index}}">Email{{index ? ' ' + (index+1) : ''}}</label>
+    <input type="email" class="form-control" id="emailInputNo{{index}}" formControlName="email">
+  </div>
+</div>
