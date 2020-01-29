@@ -1,1 +1,31 @@
-<p>email-phone-input works!</p>
+<!-- Array of email inputs -->
+<ng-container [formGroup]="emailsAndPhonesForm">
+  <ng-container formArrayName="emails">
+    <ng-container *ngFor="let email of emails.controls; index as i">
+      <div class="row">
+        <app-email-input [index]="i+1" [formControlName]="i"></app-email-input>
+      </div>
+    </ng-container>
+    <button type="button" (click)="addEmail()">Another Email</button>
+  </ng-container>
+  <ng-container formArrayName="phones">
+    <ng-container *ngFor="let phone of phones.controls; index as i">
+      <div class="row">
+        <div class="form-group">
+          <label>Phone {{ i + 1 }}</label>
+          <app-phone-input [formControlNameCustom]="i"></app-phone-input>
+        </div>
+      </div>
+    </ng-container>
+    <button type="button" (click)="addPhone()">Another Phone</button>
+  </ng-container>
+</ng-container>
+<!-- Array of phone inputs -->
+<div class="jumbotron">
+  <div *ngFor="let email of emails.value">
+    {{email?.email }}
+  </div>
+  <div *ngFor="let phone of phones.value">
+    {{phone?.internationalNumber }}
+  </div>
+</div>

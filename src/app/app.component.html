@@ -1,20 +1,15 @@
 <div class="container-fluid mt-3">
   <div class="card">
     <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="card-header bg-light">
-      <h4>Nested Form Testing.</h4>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <app-email-input formControlName="email"></app-email-input>
+      <div class="card-header bg-light">
+        <h4>Nested Form Testing.</h4>
       </div>
-      <div class="row">
-        <app-phone-input formControlNameCustom="phone"></app-phone-input>
+      <div class="card-body" formGroupName="notifications">
+        <app-email-phone-input formControlName="emailsAndPhones"></app-email-phone-input>
       </div>
-    </div>
-    <div class="card-footer bg-light">
-      <button>Submit</button>
-    </div>
-  </form>
+      <div class="card-footer bg-light">
+        <button>Submit</button>
+      </div>
+    </form>
   </div>
 </div>

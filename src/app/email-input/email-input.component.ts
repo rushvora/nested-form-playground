@@ -1,5 +1,5 @@
 import { Component, OnInit, forwardRef, OnDestroy, Input } from '@angular/core';
-import { NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, FormGroup, FormBuilder, FormControl, Validator } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -20,24 +20,23 @@ import { takeUntil } from 'rxjs/operators';
     }
   ]
 })
-export class EmailInputComponent implements OnInit, ControlValueAccessor, OnDestroy {
+export class EmailInputComponent implements OnInit, ControlValueAccessor, Validator, OnDestroy {
   @Input() index: number;
   emailInputForm: FormGroup;
   private destroy$ = new Subject();
 
-  constructor(private formBuilder: FormBuilder) {
-    this.emailInputForm = this.formBuilder.group({
-      email: ['']
-    });
-   }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.emailInputForm = this.formBuilder.group({
+      email: []
+    });
   }
 
   public onTouched: () => void = () => { };
 
   writeValue(val: any): void {
-      val && this.emailInputForm.setValue(val, { emitEvent: false });
+    val && this.emailInputForm.setValue(val, { emitEvent: false });
   }
 
   registerOnChange(fn: any): void {
@@ -50,12 +49,12 @@ export class EmailInputComponent implements OnInit, ControlValueAccessor, OnDest
     this.onTouched = fn;
   }
 
-  setDisabledState? (isDisabled: boolean): void {
+  setDisabledState?(isDisabled: boolean): void {
     isDisabled ? this.emailInputForm.disabled : this.emailInputForm.enabled;
   }
 
   validate(_: FormControl) {
-    return this.emailInputForm.valid ? null : {invalidForm: {valid: false, message: `Email field is invalid.`}}
+    return this.emailInputForm.valid ? null : { invalidForm: { valid: false, message: `Email field is invalid.` } };
   }
 
   ngOnDestroy() {

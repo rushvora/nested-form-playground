@@ -9,14 +9,18 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class AppComponent implements OnInit {
   title = 'nested-form-playground';
   form: FormGroup;
+  emailsAndPhones: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
     this.form = this.fb.group({
-      email: [''],
-      phone: ['']
+      notifications: this.fb.group({
+        emailsAndPhones: []
+      })
     });
+    this.emailsAndPhones = this.form.get('notifications.emailsAndPhones') as FormGroup;
   }
-  ngOnInit() { }
 
   submit() {
     console.log(this.form.value);
