@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, forwardRef } from '@angular/core';
 import {
   FormGroup, FormBuilder, FormArray, FormControl, ControlValueAccessor,
-  Validator, NG_VALUE_ACCESSOR, NG_VALIDATORS
+  Validator, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators, AbstractControl
 } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -57,16 +57,37 @@ export class EmailPhoneInputComponent implements OnInit, ControlValueAccessor, V
     this.onTouched = fn;
   }
 
-  validate(_: FormControl) {
-    return this.emailsAndPhonesForm.valid ? null : { invalidForm: { valid: false, message: `Email or Phone is invalid.` } };
+  validate(_: AbstractControl) {
+    let emailsValidity = {};
+    let phonesValidity = {};
+    this.emails.valid ? emailsValidity = null : { invalidForm: {valid: false, message: `Email is invalid.`}};
+    this.phones.valid ? phonesValidity = null : { invalidForm: {valid: false, message: `Phone is invalid.`}};
+    console.log('Emails and Phones Form in validate: ');
+    console.log(this.emailsAndPhonesForm);
+    console.log('Emails in validate: ');
+    console.log(this.emails);
+    console.log('Phones in validate: ');
+    console.log(this.phones);
+    if (emailsValidity && phonesValidity) {
+      const combinedValidity = { invalidForm: {valid: false, message: `Email & phone are invalid.`}};
+      return combinedValidity;
+    } else if (emailsValidity) {
+      return emailsValidity;
+    } else if (phonesValidity) {
+      return phonesValidity;
+    } else {
+      return null;
+    }
   }
 
   addEmail() {
-    this.emails.push(new FormControl(''));
+    this.emails.push(new FormControl('', Validators.email));
   }
 
   addPhone() {
-    this.phones.push(new FormControl(''));
+    this.phones.push(new FormControl('', Validators.required));
+    console.log('Emails and Phones Form in addPhone: ');
+    console.log(this.emailsAndPhonesForm);
   }
 
   ngOnDestroy() {

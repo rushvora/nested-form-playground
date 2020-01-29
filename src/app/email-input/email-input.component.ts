@@ -1,5 +1,6 @@
 import { Component, OnInit, forwardRef, OnDestroy, Input } from '@angular/core';
-import { NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, FormGroup, FormBuilder, FormControl, Validator } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, FormGroup,
+   FormBuilder, Validator, AbstractControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -53,7 +54,7 @@ export class EmailInputComponent implements OnInit, ControlValueAccessor, Valida
     isDisabled ? this.emailInputForm.disabled : this.emailInputForm.enabled;
   }
 
-  validate(_: FormControl) {
+  validate(_: AbstractControl) {
     return this.emailInputForm.valid ? null : { invalidForm: { valid: false, message: `Email field is invalid.` } };
   }
 
