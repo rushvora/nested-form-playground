@@ -4,12 +4,28 @@
       <div class="card-header bg-light">
         <h4>Nested Form Testing.</h4>
       </div>
-      <div class="card-body" formGroupName="notifications">
-        <app-email-phone-input formControlName="emailsAndPhones"></app-email-phone-input>
+      <div class="card-body">
+        <div class="custom-checkbox custom-control custom-control-inline">
+          <input type="checkbox" id="email-checkbox" [(ngModel)]="emailCheckbox" class="custom-control-input"
+            [ngModelOptions]="{standalone: true}">
+          <label for="email-checkbox" class="custom-control-label">Emails</label>
+        </div>
+        <div class="custom-checkbox custom-control custom-control-inline">
+          <input type="checkbox" id="phone-checkbox" [(ngModel)]="phoneCheckbox" class="custom-control-input"
+            [ngModelOptions]="{standalone: true}">
+          <label for="phone-checkbox" class="custom-control-label">Phones</label>
+        </div>
+        <app-email-phone-input formGroupName="notifications" [emailArrayName]="'notificationEmails'"
+          [phoneArrayName]="'notificationSms'" [showEmails]="emailCheckbox" [showPhones]="phoneCheckbox"
+          [submitted]="submitted">
+        </app-email-phone-input>
       </div>
       <div class="card-footer bg-light">
         <button>Submit</button>
       </div>
     </form>
+    <div class="jumbotron">
+      <pre>{{form.value | json}}</pre>
+    </div>
   </div>
 </div>

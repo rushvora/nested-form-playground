@@ -1,6 +1,6 @@
 import { Component, OnInit, forwardRef, OnDestroy, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, FormGroup,
-   FormBuilder, Validator, AbstractControl } from '@angular/forms';
+   FormBuilder, Validator, AbstractControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -30,18 +30,19 @@ export class EmailInputComponent implements OnInit, ControlValueAccessor, Valida
 
   ngOnInit() {
     this.emailInputForm = this.formBuilder.group({
-      email: []
+      email: ['', Validators.email]
     });
   }
 
   public onTouched: () => void = () => { };
 
   writeValue(val: any): void {
-    val && this.emailInputForm.setValue(val, { emitEvent: false });
+    // val && this.emailInputForm.patchValue(val, { emitEvent: false });
+    val && this.emailInputForm.get('email').setValue(val, { emitEvent: false });
   }
 
   registerOnChange(fn: any): void {
-    this.emailInputForm.valueChanges
+    this.emailInputForm.get('email').valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe(fn);
   }
