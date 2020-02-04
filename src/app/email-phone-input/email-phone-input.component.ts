@@ -41,12 +41,14 @@ export class EmailPhoneInputComponent implements OnInit, OnChanges {
     this.emails.push(new FormControl('', [Validators.required, Validators.email]));
     this.showEmails = true;
     this.submitted = false;
+    this.submittedChange.emit(false);
   }
 
   addPhone() {
     this.phones.push(new FormControl('', [Validators.required]));
     this.showPhones = true;
     this.submitted = false;
+    this.submittedChange.emit(false);
   }
 
   deleteEmail(index) {

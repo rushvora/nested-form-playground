@@ -37,7 +37,6 @@ export class EmailInputComponent implements OnInit, ControlValueAccessor, Valida
   public onTouched: () => void = () => { };
 
   writeValue(val: any): void {
-    // val && this.emailInputForm.patchValue(val, { emitEvent: false });
     val && this.emailInputForm.get('email').setValue(val, { emitEvent: false });
   }
 

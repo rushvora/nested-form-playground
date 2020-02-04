@@ -17,7 +17,7 @@
         </div>
         <app-email-phone-input formGroupName="notifications" [emailArrayName]="'notificationEmails'"
           [phoneArrayName]="'notificationSms'" [showEmails]="emailCheckbox" [showPhones]="phoneCheckbox"
-          [submitted]="submitted">
+          [(submitted)]="submitted">
         </app-email-phone-input>
       </div>
       <div class="card-footer bg-light">

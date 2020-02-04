@@ -3,16 +3,12 @@
   <small class="text-danger" *ngIf="submitted && !showEmails && !emails?.valid">
     Please correct invalid email data below.
   </small>
-  <small class="text-danger" *ngIf="submitted && !showPhones && !phones?.valid">
-    Please correct invalid phone data below.
-  </small>
   <ng-container [formArrayName]="emailArrayName">
     <ng-container *ngFor="let email of emails.controls; index as i">
       <div class="row" [hidden]="!showEmails">
         <div class="form-group">
           <app-email-input [index]="i+1" [formControlName]="i"></app-email-input>
-          <small class="text-danger" 
-          *ngIf="(email?.touched || submitted) && email?.errors?.required">
+          <small class="text-danger" *ngIf="(email?.touched || submitted) && email?.errors?.required">
             Email is required.
           </small>
           <small class="text-danger" *ngIf="email?.dirty && email?.errors?.email">
@@ -24,30 +20,33 @@
     </ng-container>
     <button type="button" (click)="addEmail()">Another Email</button>
   </ng-container>
-  <ng-container>
-    <ng-container [formArrayName]="phoneArrayName">
-      <ng-container *ngFor="let phone of phones.controls; index as i">
-        <div class="row" [hidden]="!showPhones">
-          <div class="form-group">
-            <label>Phone {{ i + 1 }}</label>
-            <app-phone-input [formControlNameCustom]="i"></app-phone-input>
-            <ng-container *ngIf="(phone?.touched || submitted) && phone?.errors">
-              <small class="text-danger" *ngIf="phone?.errors?.required">
-                Phone is required.
-              </small>
-              <small class="text-danger" *ngIf="phone?.value && phone?.errors?.validatePhoneNumber">
-                Phone is invalid.
-              </small>
-            </ng-container>
-            <button type="button" (click)="deletePhone(i)" class="btn-danger">Delete Phone {{i+1}}</button>
-          </div>
-        </div>
-      </ng-container>
-      <button type="button" (click)="addPhone()">Another Phone</button>
-    </ng-container>
-  </ng-container>
 </ng-container>
 <!-- Array of phone inputs -->
+<ng-container [formGroup]="emailsAndPhonesForm">
+  <small class="text-danger" *ngIf="submitted && !showPhones && !phones?.valid">
+    Please correct invalid phone data below.
+  </small>
+  <ng-container [formArrayName]="phoneArrayName">
+    <ng-container *ngFor="let phone of phones.controls; index as i">
+      <div class="row" [hidden]="!showPhones">
+        <div class="form-group">
+          <label>Phone {{ i + 1 }}</label>
+          <app-phone-input [formControlNameCustom]="i"></app-phone-input>
+          <ng-container *ngIf="(phone?.touched || submitted) && phone?.errors">
+            <small class="text-danger" *ngIf="phone?.errors?.required">
+              Phone is required.
+            </small>
+            <small class="text-danger" *ngIf="phone?.value && phone?.errors?.validatePhoneNumber">
+              Phone is invalid.
+            </small>
+          </ng-container>
+          <button type="button" (click)="deletePhone(i)" class="btn-danger">Delete Phone {{i+1}}</button>
+        </div>
+      </div>
+    </ng-container>
+    <button type="button" (click)="addPhone()">Another Phone</button>
+  </ng-container>
+</ng-container>
 <div class="jumbotron">
   <div *ngFor="let email of emails.value">
     {{email }}
