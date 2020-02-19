@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormArray, FormControl, ControlContainer, Validators } from '@angular/forms';
-import { ɵb } from '@rushvora/ngx-intl-tel-input';
+import { ɵb as IntlPhoneValidator } from '@rushvora/ngx-intl-tel-input';
 
 @Component({
   selector: 'app-email-phone-input',
@@ -14,7 +14,6 @@ export class EmailPhoneInputComponent implements OnInit, OnChanges {
   @Input() showEmails: boolean;
   @Input() showPhones: boolean;
   @Input() submitted: boolean;
-  @Output() submittedChange = new EventEmitter<boolean>();
   emails: FormArray;
   phones: FormArray;
 
@@ -25,30 +24,33 @@ export class EmailPhoneInputComponent implements OnInit, OnChanges {
     this.emailsAndPhonesForm = this.controlContainer.control as FormGroup;
     if (this.emailArrayName) {
       this.emails = this.emailsAndPhonesForm.get(this.emailArrayName) as FormArray;
-    } else {
-      this.emails = this.emailsAndPhonesForm.get('emails') as FormArray;
-      this.emailArrayName = 'emails';
     }
+
     if (this.phoneArrayName) {
       this.phones = this.emailsAndPhonesForm.get(this.phoneArrayName) as FormArray;
-    } else {
-      this.phones = this.emailsAndPhonesForm.get('phones') as FormArray;
-      this.phoneArrayName = 'phones';
     }
   }
 
   addEmail() {
-    this.emails.push(new FormControl('', [Validators.required, Validators.email]));
-    this.showEmails = true;
-    this.submitted = false;
-    this.submittedChange.emit(false);
+    if (this.emails.valid) {
+      this.emails.push(new FormControl('', [Validators.required, Validators.email]));
+      this.showEmails = true;
+      this.emails.markAsUntouched();
+    } else {
+      this.showEmails = true;
+      this.emails.markAllAsTouched();
+    }
   }
 
   addPhone() {
-    this.phones.push(new FormControl('', [Validators.required]));
-    this.showPhones = true;
-    this.submitted = false;
-    this.submittedChange.emit(false);
+    if (this.phones.valid) {
+      this.phones.push(new FormControl('', [Validators.required]));
+      this.showPhones = true;
+      this.phones.markAsUntouched();
+    } else {
+      this.showPhones = true;
+      this.phones.markAllAsTouched();
+    }
   }
 
   deleteEmail(index) {
@@ -75,14 +77,14 @@ export class EmailPhoneInputComponent implements OnInit, OnChanges {
 
     if (this.showPhones && this.phones) {
       this.phones.controls.forEach(control => {
-        control.setValidators([Validators.required, ɵb]);
+        control.setValidators([Validators.required, IntlPhoneValidator]);
         control.updateValueAndValidity();
       });
     } else if (this.phones) {
       this.phones.controls.forEach(control => {
         control.clearValidators();
         control.updateValueAndValidity();
-        control.setValidators([ɵb]);
+        control.setValidators([IntlPhoneValidator]);
         control.updateValueAndValidity();
       });
     }

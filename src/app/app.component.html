@@ -5,19 +5,21 @@
         <h4>Nested Form Testing.</h4>
       </div>
       <div class="card-body">
-        <div class="custom-checkbox custom-control custom-control-inline">
+        <div class="custom-checkbox custom-control">
           <input type="checkbox" id="email-checkbox" [(ngModel)]="emailCheckbox" class="custom-control-input"
             [ngModelOptions]="{standalone: true}">
           <label for="email-checkbox" class="custom-control-label">Emails</label>
         </div>
-        <div class="custom-checkbox custom-control custom-control-inline">
+        <app-email-phone-input formGroupName="notifications" [emailArrayName]="'notificationEmails'"
+          [showEmails]="emailCheckbox" [submitted]="submitted">
+        </app-email-phone-input>
+        <div class="custom-checkbox custom-control">
           <input type="checkbox" id="phone-checkbox" [(ngModel)]="phoneCheckbox" class="custom-control-input"
             [ngModelOptions]="{standalone: true}">
           <label for="phone-checkbox" class="custom-control-label">Phones</label>
         </div>
-        <app-email-phone-input formGroupName="notifications" [emailArrayName]="'notificationEmails'"
-          [phoneArrayName]="'notificationSms'" [showEmails]="emailCheckbox" [showPhones]="phoneCheckbox"
-          [(submitted)]="submitted">
+        <app-email-phone-input formGroupName="notifications" [phoneArrayName]="'notificationSms'"
+          [showPhones]="phoneCheckbox" [submitted]="submitted">
         </app-email-phone-input>
       </div>
       <div class="card-footer bg-light">
