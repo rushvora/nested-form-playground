@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormArray, FormControl, ControlContainer, Validators } from '@angular/forms';
-import { ɵb as IntlPhoneValidator } from '@rushvora/ngx-intl-tel-input';
+import { ɵb as IntlPhoneValidator } from 'ngx-intl-tel-input';
 
 @Component({
   selector: 'app-email-phone-input',

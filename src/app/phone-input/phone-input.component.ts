@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { FormGroup, ControlContainer } from '@angular/forms';
-import { SearchCountryField, TooltipLabel, CountryISO } from '@rushvora/ngx-intl-tel-input';
+import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
 
 @Component({
   selector: 'app-phone-input',

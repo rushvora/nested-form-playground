@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { NgxIntlTelInputModule } from '@rushvora/ngx-intl-tel-input';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PhoneInputComponent } from './phone-input/phone-input.component';
 import { EmailInputComponent } from './email-input/email-input.component';
