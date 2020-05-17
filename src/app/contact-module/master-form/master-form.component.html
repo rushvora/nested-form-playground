@@ -1,0 +1,8 @@
+<div class="container-fluid"
+     [formGroup]="contactForm">
+  <app-contact formGroupName="contact"></app-contact>
+  <app-address formGroupName="address"></app-address>
+  <div class="jumbotron">
+    <pre>{{contactForm.value | json}}</pre>
+  </div>
+</div>

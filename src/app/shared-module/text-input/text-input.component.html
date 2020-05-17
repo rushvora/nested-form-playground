@@ -1,0 +1,51 @@
+<ng-container [ngSwitch]="type"
+              [formGroup]="inputForm">
+  <div *ngSwitchCase="'number'"
+       class="form-group">
+    <label *ngIf="label"
+           [for]="id">{{ label }}
+    </label>
+    <input type="number"
+           [class]="inputClass"
+           [name]="inputName"
+           formControlName="inputControl"
+           (blur)="onTouched()"
+           [placeholder]="placeholder">
+  </div>
+  <div *ngSwitchCase="'email'"
+       class="form-group">
+    <label *ngIf="label"
+           [for]="id">{{ label }}
+    </label>
+    <input type="email"
+           [class]="inputClass"
+           [name]="inputName"
+           formControlName="inputControl"
+           (blur)="onTouched()"
+           [placeholder]="placeholder">
+  </div>
+  <div *ngSwitchCase="'textarea'"
+       class="form-group">
+    <label *ngIf="label"
+           [for]="id">{{ label }}
+    </label>
+    <textarea [class]="inputClass"
+              [name]="inputName"
+              formControlName="inputControl"
+              (blur)="onTouched()"
+              [placeholder]="placeholder">
+    </textarea>
+  </div>
+  <div *ngSwitchDefault
+       class="form-group">
+    <label *ngIf="label"
+           [for]="id">{{ label }}
+    </label>
+    <input [type]="type"
+           [class]="inputClass"
+           [name]="inputName"
+           formControlName="inputControl"
+           (blur)="onTouched()"
+           [placeholder]="placeholder">
+  </div>
+</ng-container>
