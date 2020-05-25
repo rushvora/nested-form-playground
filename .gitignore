@@ -44,3 +44,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# ENV file containing private information
+/src/environments/environment.local.ts

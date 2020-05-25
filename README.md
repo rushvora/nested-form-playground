@@ -2,9 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.17.
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Local Server
+Run `npm run start`, after creating the file `environment.local.ts` in the `environments` folder.
+Add your own Google Maps API key in order to have Google Maps' Place's API autocomplete working for address like this -
+`googleMapsAPIKey: 'yourAPIKeyhere'`.
 
 ## Code scaffolding
 
