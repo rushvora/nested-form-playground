@@ -3,7 +3,8 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.17.
 
 ## Local Server
-Run `npm run start`, after creating the file `environment.local.ts` in the `environments` folder.
+Run `npm run start`, after creating the file `environment.local.ts` in the `environments` folder. You can mirror the
+`environment.ts` file to start with.
 Add your own Google Maps API key in order to have Google Maps' Place's API autocomplete working for address like this -
 `googleMapsAPIKey: 'yourAPIKeyhere'`.
 
