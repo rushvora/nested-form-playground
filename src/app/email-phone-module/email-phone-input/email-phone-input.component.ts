@@ -61,6 +61,14 @@ export class EmailPhoneInputComponent implements OnInit, OnChanges {
     this.phones.removeAt(index);
   }
 
+  disablePhone(index) {
+    this.phones.at(index).disable();
+  }
+
+  enablePhone(index) {
+    this.phones.at(index).enable();
+  }
+
   ngOnChanges() {
     console.log(`ngOnChanges triggered`);
     if (this.showEmails && this.emails) {

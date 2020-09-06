@@ -29,7 +29,7 @@ export class EmailPhoneMasterFormComponent implements OnInit, AfterContentChecke
     this.emails = this.form.get('notifications.notificationEmails') as FormArray;
     this.phones = this.form.get('notifications.notificationSms') as FormArray;
 
-    if ((this.emailData && this.emailData.length) || (this.phoneData && this.phoneData.length)) {
+    if ((Array.isArray(this.emailData)) || (Array.isArray(this.phoneData))) {
       this.populateFormArray();
     }
   }
@@ -39,13 +39,13 @@ export class EmailPhoneMasterFormComponent implements OnInit, AfterContentChecke
   }
 
   populateFormArray() {
-    if (this.emailData && this.emailData.length) {
+    if (Array.isArray(this.emailData) && this.emailData.length > 0) {
       this.emailCheckbox = true;
       this.emailData.forEach(email => {
         this.emails.push(new FormControl(email, [Validators.required, Validators.email]));
       });
     }
-    if (this.phoneData && this.phoneData.length) {
+    if (Array.isArray(this.phoneData) && this.phoneData.length > 0) {
       this.phoneCheckbox = true;
       this.phoneData.forEach(phone => {
         this.phones.push(new FormControl(phone, Validators.required));
