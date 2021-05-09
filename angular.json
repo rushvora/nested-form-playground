@@ -155,5 +155,8 @@
       }
     }
   },
-  "defaultProject": "nested-form-playground"
+  "defaultProject": "nested-form-playground",
+  "cli": {
+    "analytics": false
+  }
 }
